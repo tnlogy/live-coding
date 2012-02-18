@@ -1,0 +1,125 @@
+
+@gridColumns:       14;
+@gridColumnWidth:   90px;
+@gridGutterWidth:   2px;
+
+html, body { margin: 0; padding: 0; }
+
+// clearfix h5bp.com/q
+.row {
+  zoom: 1;
+  &:before,
+  &:after {
+    display: table;
+    content: "";
+    zoom: 1;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+.row > [class*="span"] {
+  display: inline;
+  float: left;
+  margin-left: @gridGutterWidth;
+}
+
+.columns(@columnSpan: 1) {
+  width: (@gridColumnWidth * @columnSpan) + (@gridGutterWidth * (@columnSpan - 1));
+}
+
+.span1     { .columns(1); }
+.span2     { .columns(2); }
+.span3     { .columns(3); }
+.span4     { .columns(4); }
+.span5     { .columns(5); }
+.span6     { .columns(6); }
+.span7     { .columns(7); }
+.span8     { .columns(8); }
+.span9     { .columns(9); }
+.span10    { .columns(10); }
+.span11    { .columns(11); }
+.span12    { .columns(12); }
+.span13    { .columns(13); }
+.span14    { .columns(14); }
+.span15    { .columns(15); }
+.span16    { .columns(16); }
+
+.offset(@columnOffset: 1) {
+  margin-left: (@gridColumnWidth * @columnOffset) + (@gridGutterWidth * (@columnOffset - 1)) + (@gridGutterWidth * 2);
+}
+
+.row {
+  > .offset0   {}
+  > .offset1   { .offset(1); }
+  > .offset2   { .offset(2); }
+  > .offset3   { .offset(3); }
+  > .offset4   { .offset(4); }
+  > .offset5   { .offset(5); }
+  > .offset6   { .offset(6); }
+  > .offset7   { .offset(7); }
+  > .offset8   { .offset(8); }
+  > .offset9   { .offset(9); }
+  > .offset10  { .offset(10); }
+  > .offset11  { .offset(11); }
+  > .offset12  { .offset(12); }
+}
+
+.opacity(@opacity: 100) {
+  filter: e(%("alpha(opacity=%d)", @opacity));
+  -khtml-opacity: @opacity / 100;
+    -moz-opacity: @opacity / 100;
+         opacity: @opacity / 100;
+}
+
+// Border Radius
+.border-radius(@radius: 5px) {
+  -webkit-border-radius: @radius;
+     -moz-border-radius: @radius;
+          border-radius: @radius;
+}
+
+// Drop shadows
+.box-shadow(@shadow: 0 1px 3px rgba(0,0,0,.25)) {
+  -webkit-box-shadow: @shadow;
+     -moz-box-shadow: @shadow;
+          box-shadow: @shadow;
+}
+
+
+@dialogBackground: lightblue;
+
+.dialog-arrow {
+  width: 0;
+  height: 0;
+  position:relative;
+  left: @gridColumnWidth/2;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid @dialogBackground;
+}
+
+.dialog {
+  .border-radius();
+  background:lightblue;
+  height:100px;
+  padding: 10px 10px 10px 10px;
+  margin-bottom:2px;
+}
+
+.close {
+  float: right;
+  text-decoration: none;
+  margin-right:5px;
+  color:black;
+  font-size: 20px;
+  font-weight: bold;
+  .opacity(40);
+  &:hover {
+    .opacity(90);
+  }
+}
+
+
+

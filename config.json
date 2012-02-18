@@ -1,0 +1,4 @@
+{
+  "code": "client/test.js",
+  "enable_socket_io": true
+}

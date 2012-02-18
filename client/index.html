@@ -1,0 +1,121 @@
+<html>
+<head>
+	<title>watcher</title>
+
+  <link rel="stylesheet" href="lib/codemirror/lib/codemirror.css">
+  <script src="lib/codemirror/lib/codemirror.js"></script>
+  <script src="lib/codemirror/mode/javascript/javascript.js"></script>
+
+
+  <link rel="stylesheet/less" href="lib/grid.less">
+  <script src="lib/jquery.js"></script>
+  <script src="lib/less.js"></script>
+
+  <script src="lib/underscore.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+
+  <link type="text/css" href="lib/jquery-ui/ui-lightness/jquery-ui-1.8.17.custom.css" rel="stylesheet"/> 
+  <script type="text/javascript" src="lib/jquery-ui/jquery-ui.js"></script>
+
+  <style type="text/css">
+  body {
+    padding:50px 50px 50px 50px;
+    font-family: Droid Sans, Arial, sans-serif;
+  }
+  h1 {
+    font-weight:bold;
+    font-size:42px;
+  }
+  .canvas {
+    height:480px
+  }
+  canvas {
+    position:absolute;
+  }
+  .code {
+    height:480px;
+  }
+  .CodeMirror {
+    border: 2px solid #eee;
+  }
+  .CodeMirror-scroll {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .dialog-box {
+    background:#eee;
+    border: 2px solid #aaa;
+    padding-left:10px;
+    padding-right:10px;
+    padding-top:5px;
+    padding-bottom:5px;
+    height:60px;
+  }
+  .code-line {
+    font-size:14px;
+    font-family: Monaco;
+    margin:0 0 5px 0;
+  }
+  .row {
+    margin-bottom:5px;
+  }
+  .lock-button {
+    text-align:center;
+    border:2px solid grey;
+    padding-top:5px;
+    padding-bottom:5px;
+    height:60px;
+  }
+  .locked {
+    color:orange;
+  }
+  </style>
+  <script type="text/template" id="dialog-template" charset="utf-8">
+    <div class="row">
+      <div class="span13 dialog-box">
+        <p class="code-line"></p>
+        <div id="content"></div>
+      </div>
+      <div class="span1 lock-button">
+        <input id="remove-button" type="button" value="remove">
+        <input id="lock-button" type="button" value="keep">
+      </div>
+    </div>
+  </script>
+
+  <script type="text/template" id="toggle-template" charset="utf-8">
+    <form>
+      <div id="toggle">
+        <input type="radio" id="true" name="radio" /><label for="true">true</label>
+        <input type="radio" id="false" name="radio"/><label for="false">false</label>
+      </div>
+    </form>
+  </script>
+
+</head>
+<body>
+<div style="position:absolute;top:0px;left:0px;font-size:12px;font-family:Monaco;">
+ enjoy! =^.^= - nurmiranta@gmail.com
+</div>
+<div class="row">
+  <div class="canvas span7"></div>
+  <div class="code span7"></div>
+</div>
+<div id="dialogs">
+</div>
+
+<script>
+  var cu = _.require('codeUpdate');
+
+  if(window.io) {
+    var socket = io.connect();
+    socket.on('code-update', function (code) {
+      cu.codeUpdate(code, socket);
+    });
+  } else {
+    cu.codeUpdate(_.get('test.js'));    
+  }
+</script>
+</body>
+</html>
